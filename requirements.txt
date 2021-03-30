@@ -16,6 +16,8 @@ django-login-required-middleware==0.4
 filelock==3.0.12
 gunicorn==20.0.4
 idna==2.10
+djangorestframework==3.11.0
+djangorestframework-jwt==1.11.0
 isort==4.3.21
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
