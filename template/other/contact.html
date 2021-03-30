@@ -1,0 +1,158 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block custom_css %}
+
+<style>
+	.bannerbg {
+		background-image: url("{% static 'images/bg_3.jpg' %}");
+	}
+</style>
+
+{% endblock custom_css %}
+
+{% block mainContent %}
+	
+	<section class="hero-wrap hero-wrap-2 bannerbg" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-end justify-content-center">
+				<div class="col-md-9 ftco-animate pb-5 text-center">
+					<h1 class="mb-3 bread">Contact us</h1>
+					<p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home <i class="fa fa-chevron-right"></i></a></span> <span>Contact us <i class="fa fa-chevron-right"></i></span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<div class="wrapper px-md-4">
+						<div class="row mb-5">
+							<div class="col-md-3">
+								<div class="dbox w-100 text-center">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="fa fa-map-marker"></span>
+									</div>
+									<div class="text">
+										<p><span>Surat, Gujarat.</span></p> 
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="dbox w-100 text-center">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="fa fa-phone"></span>
+									</div>
+									<div class="text">
+										<p><span>Phone:<br/></span> <a href="tel://8758697489">+91 8758697489</a><br/><a href="tel://7801915902">+91 7801915902</a></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="dbox w-100 text-center">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="fa fa-paper-plane"></span>
+									</div>
+									<div class="text">
+										<p><span>Email:<br/></span> <a href="mailto:info.incredibletechnology@gmail.com">info.incredibletechnology<br>@gmail.com</a></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="dbox w-100 text-center">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="fa fa-globe"></span>
+									</div>
+									<div class="text">
+										<p><span>Website<br/></span> <a href="https://incredibletechnology.co.in">incredibletechnology.co.in</a></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters">
+							<div class="col-md-7">
+								<div class="contact-wrap w-100 p-md-5 p-4">
+									<!-- <?php if(isset($_GET['sent'])) {
+											if($_GET['sent'] == "true") {
+												echo '<h3 class="mb-4" align="center"><b>Thank You. We have recieved you Message.</b></h3>';
+											}
+											else {
+												echo '<h3 class="mb-4" align="center"><b>Error !!! Please try again.</b></h3>';
+											}
+									}								
+									?> -->
+									{% if messages %}
+									{% for m in messages %}
+										{% if m.tags == 'success' %}
+										<div style="display: block;" class="alert alert-success alert-dismissible fade show" role="alert" id="remove_alert">
+										<strong>Great!</strong> {{m}}
+										<!-- <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button> -->
+										</div>
+										{% else %}
+										<div style="display: block;" class="alert alert-danger alert-dismissible fade show" role="alert" id="remove_alert">
+										<strong>Upps!</strong> {{m}}
+										<!-- <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button> -->
+										</div>
+										{% endif %}
+									{% endfor %}
+									{% endif %}
+
+									<h3 class="mb-4">Contact Us</h3>
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm" action="{% url 'submit-contact-form' %}">
+										{% csrf_token %}
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="label" for="name">Full Name</label>
+													<input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
+												</div>
+											</div>
+											<div class="col-md-6"> 
+												<div class="form-group">
+													<label class="label" for="number">Contact Number</label>
+													<input type="text" class="form-control" name="number" id="number" placeholder="Mobile Number">
+												</div>
+											</div>
+											<div class="col-md-12"> 
+												<div class="form-group">
+													<label class="label" for="email">Email Address</label>
+													<input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="subject">Subject</label>
+													<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="label" for="#">Message</label>
+													<textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Message" required></textarea>
+												</div>
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<input type="submit" value="Send Message" name="submit" class="btn btn-primary">
+													<div class="submitting"></div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-5 order-md-first d-flex align-items-stretch">
+								<div id="map" class="map"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+		
+{% endblock mainContent %}

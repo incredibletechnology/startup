@@ -1,0 +1,113 @@
+{% extends 'adminbase/base.html' %}
+{% load static %}
+{% block pagetitle %}Application Details{% endblock pagetitle %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+
+{% block mainContent %}
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                                <h3 class="title-5 m-b-35">app details</h3>
+                                
+                                    <div class="table-data__tool">
+                                        
+                                            <div class="table-data__tool-left">
+                                                <a href="{% url 'add-app' %}"><button class="au-btn-filter" type="submit"><i class="fa fa-plus"></i>APP</button></a>
+                                            </div>
+                                        
+                                    </div>
+
+                                    {% if messages %}
+                                        {% for m in messages %}
+                                            {% if m.tags == 'success' %}
+                                            <div style="display: block;" class="alert alert-success alert-dismissible fade show" role="alert" id="remove_alert">
+                                            <strong>Great!</strong> {{m}}
+                                            <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                            {% else %}
+                                            <div style="display: block;" class="alert alert-danger alert-dismissible fade show" role="alert" id="remove_alert">
+                                            <strong>Upps!</strong> {{m}}
+                                            <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>App ID</th>
+                                                <th>API Key</th>
+                                                <th>Backup API Key</th>
+                                                <th>App Name</th>
+                                                <th>Languages</th>
+                                                <th>Status</th>
+                                                <!-- <th>Is Active</th> -->
+                                                <th>Deal By</th>
+                                                <th>Client</th>
+                                                <th>Host Link</th>
+                                                <th class="col-md-3">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            {% if app_data %}
+                                                {% for app in app_data %}
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{app.app_uuid}}</td>
+                                                    <td>{{app.api_key}}</td>
+                                                    <td>{{app.backup_api_key}}</td>
+                                                    <td>{{app.app_name}}</td>
+                                                    <td><span style="font-weight: 600;">Frontend: </span>{{app.frontend_language}}<br/>
+                                                        <span style="font-weight: 600;">Backend: </span>{{app.backend_language}}</td>
+                                                    
+                                                    <!-- {% if app.is_active %}
+                                                    <td class="methodget">{{app.is_active}}</td>
+                                                    {% else %}
+                                                    <td class="methoddelete">{{app.is_active}}</td>
+                                                    {% endif %} -->
+
+                                                    {% if app.status == 'Taken' %}
+                                                    <td><span class="badge rounded-pill bg-secondary pb-1" style="color: cornsilk; padding: 5px">{{app.status}}</span></td>
+                                                    {% elif app.status == 'Ongoing' %}
+                                                    <td><span class="badge rounded-pill bg-info text-dark" style="color: cornsilk; padding: 5px">{{app.status}}</span></td>
+                                                    {% else %}
+                                                    <td><span class="badge rounded-pill bg-success pb-1" style="color: cornsilk; padding: 5px">{{app.status}}</span></td>
+                                                    {% endif %}
+
+                                                    <td>{{app.deal_by}}</td>
+                                                    <td>{{app.client}}</td>
+                                                    <td>{{app.host_link}}</td>
+                                                    <td class="col-md-3"><a href="{% url 'update-app' %}?id={{app.id}}"><button class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o"></i></button></a> 
+                                                    <a href="{% url 'delete-app' %}?id={{app.id}}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></a></td>
+                                                </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                            <tr><td colspan="11" style="text-align: center; font-size: 15px;">No App Data Found</td></tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE-->
+
+                            </div>
+                        </div>
+                        {% include 'adminbase/footer.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock mainContent %}

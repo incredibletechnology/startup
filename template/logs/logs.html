@@ -1,0 +1,231 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block pagetitle %}API Log List{% endblock pagetitle %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+
+{% block mainContent %}
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+
+                                {% if result == 'yes' %}
+                                <h3 class="title-5 m-b-15">API log data</h3>
+                                <p class="m-b-35">Filter By : 
+                                    {% if property_name != 'None' %}
+                                        {{property_name}} | 
+                                    {% endif %}
+                                    {% if time_name != '' %}
+                                        [ {{from_date}} - {{to_date}} ]
+                                    {% endif %}
+                                    <a href="{% url 'get-logs' %}" style="background-color: rgba(255, 255, 255, 0.938);padding: 5px; border-radius: 6%;color: red;"><i class="zmdi zmdi-close"></i> Clear filter</a>
+                                </p>
+                                {% else %}
+                                <h3 class="title-5 m-b-35">API log data</h3>
+                                {% endif %}
+
+                                {% if messages %}
+                                {% for m in messages %}
+                                    {% if m.tags == 'success' %}
+                                    <div style="display: block;" class="alert alert-success alert-dismissible fade show" role="alert" id="remove_alert">
+                                    <strong>Great!</strong> {{m}}
+                                    <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% elif m.tags == 'info' %}
+                                    <div style="display: block;" class="alert alert-info alert-dismissible fade show" role="alert" id="remove_alert">
+                                    <strong>Hey!</strong> {{m}}
+                                    <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% else %}
+                                    <div style="display: block;" class="alert alert-danger alert-dismissible fade show" role="alert" id="remove_alert">
+                                    <strong>Upps!</strong> {{m}}
+                                    <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                    <div class="table-data__tool">
+                                        
+                                            <div class="table-data__tool-left">
+                                                <form method='get' action="{% url 'filter-logs' %}">
+                                                    <div>
+                                                        <div class="rs-select2--light rs-select2--md">
+                                                            <select class="js-select2" name="property" id="property">
+                                                                <option selected="selected" value="">All Properties</option>
+                                                                <option value="GET">GET</option>
+                                                                <option value="POST">POST</option>
+                                                                <option value="PUT">PUT</option>
+                                                                <option value="DELETE">DELETE</option>
+                                                            </select>
+                                                            <div class="dropDownSelect2"></div>
+                                                        </div>
+
+                                                        <!-- <input type="date" class="form-control" value=""> -->
+                                                        <!-- <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span> -->
+                                                        <div class="rs-select2--light rs-select2--sm">
+                                                            <input type="text" class="form-control" value="" placeholder="From" name="from" id="from" onfocus="(this.type='date')">
+                                                            <!-- <input type="text" placeholder="From" class="col-lg-12" onfocus="(this.type='date')"> -->
+                                                        </div>
+
+                                                        <div class="rs-select2--light rs-select2--sm">
+                                                            <input type="text" class="form-control" value="" placeholder="To" name="to" id="to" onfocus="(this.type='date')">
+                                                        </div>
+
+                                                        <!-- <div class="rs-select2--light rs-select2--sm">
+                                                            <select class="js-select2" name="time" id="time">
+                                                                <option selected="selected" value="">Choose</option>
+                                                                <option value="today">Today</option>
+                                                                <option value="">Last 3 Days</option>
+                                                                <option value="1week">1 Week</option>
+                                                                <option value="1month">1 Month</option>
+                                                            </select>
+                                                            <div class="dropDownSelect2"></div>
+                                                        </div> -->
+                                                        <button class="au-btn-filter" type="submit"><i class="zmdi zmdi-filter-list"></i>filters</button>
+
+                                                        
+                                                    </div>
+                                                </form>
+                                                <!-- <a href="{% url 'get-logs' %}"><button class="au-btn-filter">
+                                                    <i class="zmdi zmdi-close"></i>Clear Filter</button></a> -->
+                                            </div>
+                                        
+                                        <div class="table-data__tool-left">
+                                            <button class="btn btn-warning" class="table-data__tool-right" onclick="exportcsv()">
+                                                <i class="fa fa-file-text"></i> &nbsp;Export (.csv)</button> 
+                                        </div>
+                                    </div>
+                                
+                                <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>User</th>
+                                                <th>Request URL</th>
+                                                <th>Used API</th>
+                                                <th>Method</th>
+                                                <th>Operation Tag</th>
+                                                <th>Response Code</th>
+                                                <th>Details</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                                <th>Deleted At</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            {% if loglist %}
+                                                {% for log in loglist %}
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td >{{log.user}}</td>
+                                                    <td class="col-lg-2">{{log.request_url}}</td>
+                                                    
+                                                    {% if log.used_weather_api %}
+                                                        <td class="methodget">{{log.used_weather_api}}</td>
+                                                    {% else %}
+                                                        <td class="methoddelete">{{log.used_weather_api}}</td>
+                                                    {% endif %}
+
+                                                    {% if log.method == 'GET' %}
+                                                        <td class="methodget"><label>{{log.method}}</label></td>
+                                                    {% elif log.method == 'POST' %}
+                                                        <td class="methodpost">{{log.method}}</td>
+                                                    {% elif log.method == 'PUT' %}
+                                                        <td class="methodput">{{log.method}}</td>
+                                                    {% else %}
+                                                        <td class="methoddelete">{{log.method}}</td>
+                                                    {% endif %}
+
+                                                    {% if log.operation_tag == 'success' %}
+                                                    <td><span class="badge rounded-pill bg-success pb-1" style="color: cornsilk; padding: 5px">{{log.operation_tag}}</span></td>
+                                                    {% elif log.operation_tag == 'info' %}
+                                                    <td><span class="badge rounded-pill bg-info text-dark" style="color: cornsilk; padding: 5px">{{log.operation_tag}}</span></td>
+                                                    {% else %}
+                                                    <td><span class="badge rounded-pill bg-danger pb-1" style="color: cornsilk; padding: 5px">{{log.operation_tag}}</span></td>
+                                                    {% endif %}
+
+                                                    <td>{{log.response_code}}</td>
+                                                    <td class="col-lg-3">{{log.details}}</td>
+                                                    <td>{{log.created_at|date:'d-m-Y g:i A'}}</td>
+                                                    <td>{{log.updated_at|date:'d-m-Y g:i A'}}</td>
+                                                    <td>{{log.deleted_at|date:'d-m-Y g:i A'}}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                            <tr><td colspan="11" style="text-align: center; font-size: 15px;">No API Log Data Found</td></tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE-->
+
+                                {% if loglist.has_other_pages %}
+                                <hr style="padding-bottom: 4px; background-color: brown;" />
+                                <div class="page" style="margin-right: 20px;">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-end">
+                                            {% if not loglist.has_previous %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                            </li>
+                                            {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ loglist.previous_page_number }}" tabindex="-1">Previous</a>
+                                            </li>
+                                            {% endif %}
+                                            {% for i in loglist.paginator.page_range %}
+                                            {% if loglist.number == i %}
+                                            <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                                            {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% if loglist.has_next %}
+                                            <li class="page-item">
+                                            <a class="page-link" href="?page={{ loglist.next_page_number }}">Next</a>
+                                            </li>
+                                            {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="+1">Next</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        {% include 'base/footer.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock mainContent %}
+
+{% block custom_js %}
+
+<script>
+    function exportcsv() {
+        var property = document.getElementById('property').value;
+        var from = document.getElementById('from').value;
+        var to = document.getElementById('to').value;
+
+        // console.log(property,time)
+
+        window.location.href = "{% url 'export-api-log' %}?property="+property+"&from="+from+"&to="+to;
+    }
+</script>
+
+{% endblock custom_js %}

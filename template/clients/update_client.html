@@ -1,0 +1,134 @@
+{% extends 'adminbase/base.html' %}
+{% load static %}
+{% block pagetitle %}Update Client{% endblock pagetitle %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+
+{% block mainContent %}
+
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header"><a href="{% url 'adminindex' %}">Dashboard</a> / <a href="{% url 'get-clients' %}">Client List</a> / <span class="active">Update Client</span></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" style="font-weight: 600; color: brown;">Update Client</div>
+                            <div class="card-body card-block">
+
+                                {% if messages %}
+                                {% for m in messages %}
+                                    {% if m.tags == 'success' %}
+                                    <div style="display: block;" class="alert alert-success alert-dismissible fade show" role="alert" id="remove_alert">
+                                    <strong>Great!</strong> {{m}}
+                                    <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% else %}
+                                    <div style="display: block;" class="alert alert-danger alert-dismissible fade show" role="alert" id="remove_alert">
+                                    <strong>Upps!</strong> {{m}}
+                                    <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                
+                                <div class="row mb-3">
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-4" style="text-align: center;">
+                                        {% if client_data.image %}
+                                        <img src="{{client_data.image.url}}" width="20%" alt="Client Photo" style="border-radius: 50%;">
+                                        {% endif %}
+                                        <p>Client Photo</p>
+                                    </div>
+                                    <div class="col-lg-4"></div>
+                                </div>
+                                <form method="post" class="" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            <lable for="name" class="form-label">Name</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="name" name="name" placeholder="Enter name" class="form-control" value="{{client_data.name}}" required>
+                                                <input type="hidden"  name="cid" value="{{client_data.id}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <lable for="email" class="form-label">Email ID</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="email" name="email" value="{{client_data.email}}" placeholder="Enter email id" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <lable for="phone" class="form-label">Phone</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="phone" name="phone" value="{{client_data.phone}}" placeholder="Enter phone" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <lable for="company" class="form-label">Company</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="company" name="company" value="{{client_data.company}}" placeholder="If any" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <lable for="address" class="form-label">Address</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="address" name="address" value="{{client_data.address}}" placeholder="Type here..." class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <lable for="remark" class="form-label">Remark</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="remark" name="remark" value="{{client_data.remark}}" placeholder="Note" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <lable for="phone" class="form-label">Change Photo</lable>
+                                            <div class="photo" style="margin-top: 7px;">
+                                                <input type="file" id="photo" name="photo" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions form-group">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% include 'adminbase/footer.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock mainContent %}
+
+{% block custom_js %}
+
+<script>
+  function changepass(obj) {
+      if($(obj).is(":checked")){
+          document.getElementById('myDIV').style.display = "block"; //Do stuff
+          //alert("Yes checked"); //when checked
+
+          $("#page-header-inner").addClass("sticky");
+      }else{
+          document.getElementById('myDIV').style.display = "none"; //Do stuff
+          //alert("Not checked"); //when not checked
+      }   
+  }
+</script>
+
+{% endblock custom_js %}

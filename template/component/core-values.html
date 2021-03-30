@@ -1,0 +1,82 @@
+{% load static %}
+
+{% block custom_css %}
+
+<style>
+	.corebg {
+		background-image: url("{% static 'images/bg1.jpg' %}");
+	}
+	.corelogo {
+		background-image: url("{% static 'images/core.png' %}");
+	}
+</style>
+
+{% endblock custom_css %}
+
+<section class="ftco-section ftco-no-pb testimony-section corebg">
+		<div class="overlay-1"></div>
+		<div class="container-fluid">
+			<div class="row justify-content-center mb-5 pb-3">
+				<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+					<h2 class="mb-4">Core Values</h2>
+				</div>
+			</div>
+			<div class="row ftco-animate" style="padding-bottom:20px;">
+				<div class="col-md-12 testimonial">
+					<div class="carousel-testimony owl-carousel ftco-owl">
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch corelogo">
+								<div class="overlay"></div>
+								<div class="text">
+									<div class="line"></div>
+									<p class="mb-4">With constant learning and improvement, we strive for excellence in our team pursuits committed to innovative creations.</p>
+									<p class="name">Excellence</p>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch corelogo">
+								<div class="overlay"></div>
+								<div class="text">
+									<div class="line"></div>
+									<p class="mb-4">We are committed to the highest standards of honesty, fairness, respect, and professional and scholarly ethics.</p>
+									<p class="name">Ethics and Dignity</p>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch corelogo">
+								<div class="overlay"></div>
+								<div class="text">
+									<div class="line"></div>
+									<p class="mb-4">We are committed to fostering our client's dreams and make their product to attractive and lovable by people. 
+										We believe in growing together.</p>
+									<p class="name">Client Focus</p>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch corelogo">
+								<div class="overlay"></div>
+								<div class="text">
+									<div class="line"></div>
+									<p class="mb-4">We are committed to impart knowledge to one and all and empower the generations with skill enhancement.</p>
+									<p class="name">Diversity</p>
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="testimony-wrap d-flex align-items-stretch corelogo">
+								<div class="overlay"></div>
+								<div class="text">
+									<div class="line"></div>
+									<p class="mb-4">We are always committed to respect all our clients and users and stay loyal forever for everyone. </p>
+									<p class="name">Respect &amp; Loyalty</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

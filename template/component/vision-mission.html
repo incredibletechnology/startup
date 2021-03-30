@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block custom_css %}
+
+<style>
+	.visionmission {
+		background-image: url("{% static 'images/V&M1.png' %}");
+	}
+</style>
+
+{% endblock custom_css %}
+
+<section class="ftco-counter img" id="section-counter">
+		<div class="container">
+			<div class="row no-gutters d-flex">
+				<div class="col-md-6 d-flex">
+					<div class="img d-flex align-self-stretch visionmission"></div>
+				</div>
+				<div class="col-md-6 p-3 pl-md-5 py-5 bg-primary">
+					<div class="row justify-content-start pb-3">
+						<div class="col-md-12 heading-section heading-section-white ftco-animate">
+							<h2 class="mb-4">Our Vision &amp; <span>Mission</span></h2>
+							<p><b>Vision</b></p>
+							<p>
+								<div class="col-md-12 d-flex align-self-stretch ftco-animate">
+									<div class="media block-6 services d-block">
+										<div class="line"></div>
+										<div class="icon"><img src="{% static 'images/icon/eye-care.png' %}" height="80" width="80" alt="vision icon"/></div>
+									</div>  
+									<p style="padding-left:20px;">
+										Our vision is to provide a holistic IT solution to the world that caters to various levels of 
+										involvement from users centric environment. 
+									</p>
+								</div>
+							</p>
+							<p><b>Mission</b></p>
+							<p>
+								<div class="col-md-12 d-flex align-self-stretch ftco-animate">
+									<div class="media block-6 services d-block">
+										<div class="line"></div>
+										<div class="icon"><img src="{% static 'images/icon/target.png' %}" height="80" width="80" alt="mission icon"/></div>
+									</div> 
+									<p style="padding-left:20px;">
+										Our mission is to prepare the world a batter place to be ready for the AI revolution through IT solutions
+										and revolutionize the perception of the Information Industry.
+									</p>
+								</div>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

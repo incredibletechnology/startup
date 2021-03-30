@@ -1,0 +1,204 @@
+{% extends 'adminbase/base.html' %}
+{% load static %}
+{% block pagetitle %}Admin Setting{% endblock pagetitle %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+
+{% block mainContent %}
+
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="container">
+
+                        {% if messages %}
+                            {% for m in messages %}
+                                {% if m.tags == 'success' %}
+                                <div style="display: block;" class="alert alert-success alert-dismissible fade show" role="alert" id="remove_alert">
+                                <strong>Great!</strong> {{m}}
+                                <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% elif m.tags == 'info' %}
+                                <div style="display: block;" class="alert alert-info alert-dismissible fade show" role="alert" id="remove_alert">
+                                <strong>Nothing!</strong> {{m}}
+                                <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% else %}
+                                <div style="display: block;" class="alert alert-danger alert-dismissible fade show" role="alert" id="remove_alert">
+                                <strong>Upps!</strong> {{m}}
+                                <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <!-- Email Configuration -->
+                        <div class="card">
+                            <div class="card-header" style="font-weight: 600; color: brown;">Email Configuration</div>
+                            <div class="card-body card-block">
+                                <form method="post" class="" enctype="multipart/form-data" action="{% url 'update-email-configuration' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <lable for="ehost" class="form-label">Email Host</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="ehost" name="ehost" placeholder="Ex. smtp.gmail.com" value="{{edata.email_host}}" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <lable for="eport" class="form-label">Email Port</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="eport" name="eport" placeholder="Ex. 587 | 465 | 25" value="{{edata.email_port}}" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            <lable for="efrom" class="form-label">Email From</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="efrom" name="efrom" placeholder="What receiver will see?" value="{{edata.email_from}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <lable for="eusername" class="form-label">Email Username</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="eusername" name="eusername" placeholder="Enter your email address" value="{{edata.email_username}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <lable for="epassword" class="form-label">Email Password</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="password" id="epassword" name="epassword" placeholder="Enter your email password" value="{{edata.email_password}}" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label for="basic-url" class="form-label">Use TLS</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group" style="margin-top: 7px;">
+                                                    <div class="input-group-addon">
+                                                        <input class="form-check" type="checkbox" value=True name="tls" {{tls_style}}>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Do you want to enable TLS ?" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="basic-url" class="form-label">Use SSL</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group" style="margin-top: 7px;">
+                                                    <div class="input-group-addon">
+                                                        <input class="form-check" type="checkbox" value=True name="ssl" {{ssl_style}}>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Do you want to enable SSL ?" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="basic-url" class="form-label">Fail Silently</label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group" style="margin-top: 7px;">
+                                                    <div class="input-group-addon">
+                                                        <input class="form-check" type="checkbox" value=True name="fail_silently" {{fs_style}}>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="Text input with checkbox" value="Do you want to enable Fail Silently ?" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group col-lg-4">
+                                        <lable for="etimeout" class="form-label">Timeout</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="number" step="1" id="etimeout" name="etimeout" placeholder="In seconds" value="{{edata.timeout}}" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions form-group">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Application Details -->
+                        <div class="card">
+                            <div class="card-header" style="font-weight: 600; color: brown;">Application Details</div>
+                            <div class="card-body card-block">
+                                <form method="post" class="" enctype="multipart/form-data" action="{% url 'update-app-detail' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <lable for="app_id" class="form-label">App ID</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="app_id" name="app_id" placeholder="Enter app id" value="{{setting.app_id}}" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <lable for="api_key" class="form-label">API Key</lable>
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <input type="text" id="api_key" name="api_key" placeholder="Enter API key" value="{{setting.api_key}}" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions form-group">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance -->
+                        <div class="card">
+                            <div class="card-header" style="font-weight: 600; color: brown;">Maintenance</div>
+                            <div class="card-body card-block">
+                                <form method="post" class="" enctype="multipart/form-data" action="{% url 'update-maintenance' %}">
+                                    {% csrf_token %}
+                                    <div class="col-lg-7">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group" style="margin-top: 7px;">
+                                                <div class="input-group-addon">
+                                                    <input class="form-check" type="checkbox" value=True name="maintenance" {{maintenance_style}}>
+                                                </div>
+                                                <input type="text" class="form-control" aria-label="Text input with checkbox" value='Do you want to put "Incredible Technology" in maintenance ?' disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions form-group">
+                                        <button type="submit" class="btn btn-secondary btn-sm">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% include 'adminbase/footer.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock mainContent %}
+
+{% block custom_js %}
+
+<script>
+  function changepass(obj) {
+      if($(obj).is(":checked")){
+          document.getElementById('myDIV').style.display = "block"; //Do stuff
+          //alert("Yes checked"); //when checked
+
+          $("#page-header-inner").addClass("sticky");
+      }else{
+          document.getElementById('myDIV').style.display = "none"; //Do stuff
+          //alert("Not checked"); //when not checked
+      }   
+  }
+</script>
+
+{% endblock custom_js %}

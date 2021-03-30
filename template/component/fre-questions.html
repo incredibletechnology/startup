@@ -1,0 +1,108 @@
+{% load static %}
+
+{% block custom_css %}
+
+<style>
+	.faqbg {
+		background-image: url("{% static 'images/FAQ.jpg' %}");
+	}
+</style>
+
+{% endblock custom_css %}
+
+<section class="ftco-section bg-light ftco-faqs">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 order-md-last">
+					<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0 faqbg">
+					</div>
+				</div>
+
+				<div class="col-lg-6">
+					<div class="heading-section mb-5 mt-5 mt-lg-0">
+						<h2 class="mb-3">Frequently Asks Questions</h2>
+					</div>
+					<div id="accordion" class="myaccordion w-100" aria-multiselectable="true">
+						<div class="card">
+							<div class="card-header p-0" id="headingOne">
+								<h2 class="mb-0">
+									<button href="#collapseOne" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+										<p class="mb-0">How can we help your business?</p>
+										<i class="fa" aria-hidden="true"></i>
+									</button>
+								</h2>
+							</div>
+							<div class="collapse show" id="collapseOne" role="tabpanel" aria-labelledby="headingOne">
+								<div class="card-body py-3 px-0">
+									<ol>
+										<li>We help you to build your dream.</li>
+										<li>By building awareness of your brand</li>
+										<li>By driving online, in-app, in-person, and over-the-phone</li>
+										<li>By fulfill your all requirements</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header p-0" id="headingTwo" role="tab">
+								<h2 class="mb-0">
+									<button href="#collapseTwo" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTwo">
+										<p class="mb-0">Which services we provides?</p>
+										<i class="fa" aria-hidden="true"></i>
+									</button>
+								</h2>
+							</div>
+							<div class="collapse" id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="card-body py-3 px-0">
+									<ol>
+										<li>All types of Developments ( Web | Mobile | Software | Others)</li>
+										<li>Provides a Healthy Networking to server</li>
+										<li>Create Attractive &amp; User Friendly application</li>
+										<!-- <li>Protect your system by Cyber Security</li> -->
+										<li>Build best User interface by UI/UX designing</li>
+										<li>Hosting you product in the internet</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						
+						<div class="card">
+							<div class="card-header p-0" id="headingThree" role="tab">
+								<h2 class="mb-0">
+									<button href="#collapseThree" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseTwo">
+										<p class="mb-0">How long does it take to build a website?</p>
+										<i class="fa" aria-hidden="true"></i>
+									</button>
+								</h2>
+							</div>
+							<div class="collapse" id="collapseThree" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="card-body py-3 px-0">
+									<ol>
+										<li>It's all depends on your requirements and project size. </li>
+										<li>Contact us, if you are in hurry.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+
+						<div class="card">
+							<div class="card-header p-0" id="headingFour" role="tab">
+								<h2 class="mb-0">
+									<button href="#collapseFour" class="d-flex py-3 px-4 align-items-center justify-content-between btn btn-link" data-parent="#accordion" data-toggle="collapse" aria-expanded="false" aria-controls="collapseFour">
+										<p class="mb-0">What are your pricing?</p>
+										<i class="fa" aria-hidden="true"></i>
+									</button>
+								</h2>
+							</div>
+							<div class="collapse" id="collapseFour" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="card-body py-3 px-0">
+									<ul>We would like to say, It always depends on your Technology, Product, Design, and Time duration.</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

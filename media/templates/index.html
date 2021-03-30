@@ -1,0 +1,716 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block pagetitle %}Dashboard{% endblock pagetitle %}
+
+{% block custom_css %}
+{% endblock custom_css %}
+
+
+{% block mainContent %}
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item" style="background-color: #00ad5f;">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-swap-vertical"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{total_get}}</h2>
+                                                <span>GET</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item" style="background-color: #00b5e9;">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-trending-up"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{total_post}}</h2>
+                                                <span>POST</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item" style="background-color: #d4c009;">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-arrow-merge"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{total_put}}</h2>
+                                                <span>PUT</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item" style="background-color: #fa4251;">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{total_delete}}</h2>
+                                                <span>DELETE</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-refresh"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{total_api}}</h2>
+                                                <span>Total Requested API</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-sun"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{weather_api_used}}</h2>
+                                                <input type='hidden' value="{{weather_api_used}}" id="total_weather_api">
+                                                <span>Total Weather API Used</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-navigation"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{local_api}}</h2>
+                                                <input type='hidden' value="{{local_api}}" id="total_local_api">
+                                                <span>Local API Used</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-lamp"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{total_delete}}</h2>
+                                                <span>DELETE</span>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <!-- <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">Request Chart</h3>
+                                        <div class="chart-info">
+                                            <div class="chart-info__left">
+                                                <div class="chart-note">
+                                                    <span class="dot dot--green"></span>
+                                                    <span>GET</span>
+                                                </div>
+                                                <div class="chart-note mr-0">
+                                                    <span class="dot dot--blue"></span>
+                                                    <span>POST</span>
+                                                </div> &nbsp;
+                                                <div class="chart-note mr-0">
+                                                    <span class="dot dot--yellow"></span>
+                                                    <span>PUT</span>
+                                                </div> &nbsp;
+                                                <div class="chart-note mr-0">
+                                                    <span class="dot dot--red"></span>
+                                                    <span>DELETE</span>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="recent-report__chart">
+                                            <canvas id="recent-rep-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="au-card chart-percent-card">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 tm-b-5">Requested API Chart</h3>
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6">
+                                                <div class="chart-note-wrap">
+                                                    <div class="chart-note mr-0 d-block">
+                                                        <span class="dot dot--blue"></span>
+                                                        <span>Weather API</span>
+                                                    </div>
+                                                    <div class="chart-note mr-0 d-block">
+                                                        <span class="dot dot--red"></span>
+                                                        <span>Local API</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="percent-chart">
+                                                    <canvas id="percent-chart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2 class="title-1 m-b-25">APIs called from different Apps</h2>
+                                <div class="au-card au-card--bg-c3 au-card-top-countries m-b-40">
+                                    <div class="au-card-inner">
+                                        <div class="table-responsive">
+                                            <table class="table table-top-countries">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>App ID</th>
+                                                        <th>App Name</th>
+                                                        <th>Total Called API</th>
+                                                        <th>Weather API</th>
+                                                        <th>Local API</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="apifromapps">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- <div class="col-lg-9">
+                                <h2 class="title-1 m-b-25">Earnings By Items</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>date</th>
+                                                <th>order ID</th>
+                                                <th>name</th>
+                                                <th class="text-right">price</th>
+                                                <th class="text-right">quantity</th>
+                                                <th class="text-right">total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2018-09-29 05:57</td>
+                                                <td>100398</td>
+                                                <td>iPhone X 64Gb Grey</td>
+                                                <td class="text-right">$999.00</td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">$999.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-28 01:22</td>
+                                                <td>100397</td>
+                                                <td>Samsung S8 Black</td>
+                                                <td class="text-right">$756.00</td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">$756.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-27 02:12</td>
+                                                <td>100396</td>
+                                                <td>Game Console Controller</td>
+                                                <td class="text-right">$22.00</td>
+                                                <td class="text-right">2</td>
+                                                <td class="text-right">$44.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-26 23:06</td>
+                                                <td>100395</td>
+                                                <td>iPhone X 256Gb Black</td>
+                                                <td class="text-right">$1199.00</td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">$1199.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-25 19:03</td>
+                                                <td>100393</td>
+                                                <td>USB 3.0 Cable</td>
+                                                <td class="text-right">$10.00</td>
+                                                <td class="text-right">3</td>
+                                                <td class="text-right">$30.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-29 05:57</td>
+                                                <td>100392</td>
+                                                <td>Smartwatch 4.0 LTE Wifi</td>
+                                                <td class="text-right">$199.00</td>
+                                                <td class="text-right">6</td>
+                                                <td class="text-right">$1494.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-24 19:10</td>
+                                                <td>100391</td>
+                                                <td>Camera C430W 4k</td>
+                                                <td class="text-right">$699.00</td>
+                                                <td class="text-right">1</td>
+                                                <td class="text-right">$699.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-22 00:43</td>
+                                                <td>100393</td>
+                                                <td>USB 3.0 Cable</td>
+                                                <td class="text-right">$10.00</td>
+                                                <td class="text-right">3</td>
+                                                <td class="text-right">$30.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div> -->
+
+                            {% if total_get %}
+                            <div class="col-lg-4">
+                                <h2 class="title-1 m-b-25">Top countries</h2>
+                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40" id="myDIV1" style="height: 500px;">
+                                    <div class="au-card-inner">
+                                        <div class="table-responsive">
+                                            <table class="table table-top-countries">
+                                                <tbody class="countrylist">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h2 class="title-1 m-b-25">Top States</h2>
+                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40" id="myDIV2" style="height: 500px;">
+                                    <div class="au-card-inner">
+                                        <div class="table-responsive">
+                                            <table class="table table-top-countries">
+                                                <tbody class="statelist">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h2 class="title-1 m-b-25">Top Cities</h2>
+                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40" id="myDIV3" style="height: 500px;">
+                                    <div class="au-card-inner">
+                                        <div class="table-responsive">
+                                            <table class="table table-top-countries">
+                                                <tbody class="citylist">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% include 'base/footer.html' %}
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+
+{% endblock mainContent %}
+
+{% block custom_js %}
+
+<script>
+    $(document).ready(function () {
+
+        document.getElementById("myDIV1").style.overflow = "scroll";
+        document.getElementById("myDIV2").style.overflow = "scroll";
+        document.getElementById("myDIV3").style.overflow = "scroll";
+
+        $.ajax({
+            url: "{% url 'find-location' %}",
+            type: 'GET',
+            //dataType: 'json',
+            data: {  }
+        })
+        .done(function (response) {
+            if(response != 'False') {
+            var jsonRes = response;
+            var jsonObjects = JSON.stringify(jsonRes); 
+            var jsonData = jQuery.parseJSON( jsonObjects );
+
+            // console.log("R2:" + jsonData);
+
+            var wrapper = $(".countrylist");
+            for(i=0;i<jsonData.length; i++) {
+                for(j=0;j<1;j++) {
+                    $(wrapper).append('<tr><td>'+jsonData[i][j]+'</td><td>'+jsonData[i][j+1]+'</td></tr>');
+                }
+            }
+            }
+        })
+        $.ajax({
+            url: "{% url 'find-location-state' %}",
+            type: 'GET',
+            //dataType: 'json',
+            data: {  }
+        })
+        .done(function (response) {
+            if(response != 'False') {
+            var jsonRes = response;
+            var jsonObjects = JSON.stringify(jsonRes); 
+            var jsonData = jQuery.parseJSON( jsonObjects );
+
+            // console.log("R2:" + jsonData);
+
+            var wrapper = $(".statelist");
+            for(i=0;i<jsonData.length; i++) {
+                for(j=0;j<1;j++) {
+                    $(wrapper).append('<tr><td>'+jsonData[i][j]+'</td><td>'+jsonData[i][j+1]+'</td></tr>');
+                }
+            }
+        }
+        })
+        $.ajax({
+            url: "{% url 'find-location-city' %}",
+            type: 'GET',
+            //dataType: 'json',
+            data: {  }
+        })
+        .done(function (response) {
+            if(response != 'False') {
+            var jsonRes = response;
+            var jsonObjects = JSON.stringify(jsonRes); 
+            var jsonData = jQuery.parseJSON( jsonObjects );
+
+            // console.log("R2:" + jsonData);
+
+            var wrapper = $(".citylist");
+            for(i=0;i<jsonData.length; i++) {
+                for(j=0;j<1;j++) {
+                    $(wrapper).append('<tr><td>'+jsonData[i][j]+'</td><td>'+jsonData[i][j+1]+'</td></tr>');
+                }
+            }
+        }
+        })
+        $.ajax({
+            url: "{% url 'find-app-api' %}",
+            type: 'GET',
+            //dataType: 'json',
+            data: {  }
+        })
+        .done(function (response) {
+            var jsonRes = response;
+            var jsonObjects = JSON.stringify(jsonRes); 
+            var jsonData = jQuery.parseJSON( jsonObjects );
+
+            console.log("R2:" + jsonData);
+
+            var wrapper = $(".apifromapps");
+            for(i=0;i<jsonData.length; i++) {
+                for(j=0;j<1;j++) {
+                    $(wrapper).append('<tr><td style="color: gray;">'+(i+1)+'</td><td style="color: gray;">'+jsonData[i][j]+'</td><td style="color: gray;">'+jsonData[i][j+1]+'</td><td style="color: gray;">'+jsonData[i][j+2]+'</td><td style="color: gray;">'+jsonData[i][j+3]+'</td><td style="color: gray;">'+jsonData[i][j+4]+'</td></tr>');
+                }
+            }
+        })
+    })
+
+
+    try {
+
+        $.ajax({
+            url: "{% url 'month-wise-request' %}",
+            type: 'GET',
+            //dataType: 'json',
+            data: {  }
+        })
+        .done(function (response) {
+            var jsonRes = response;
+            var jsonObjects = JSON.stringify(jsonRes); 
+            var jsonData = jQuery.parseJSON( jsonObjects );
+
+            // console.log("R2:" + jsonData.get);
+            // console.log("R2:" + jsonData.post);
+            // console.log("R2:" + jsonData.put);
+
+            get_data = jsonData.get;
+            post_data = jsonData.post;
+            put_data = jsonData.put;
+            delete_data = jsonData.delete;
+
+        
+        // Recent Report
+        const brandGET = 'rgba( 0, 173, 95 ,1.0)'
+        const brandPOST = 'rgba( 0, 181, 233, 0.8)'
+        const brandPUT = 'rgba( 212, 192, 9 , 0.8)'
+        const brandDELETE = 'rgba(250, 66, 81,0.8)'
+
+        var elements = 10
+        // var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115]
+        // var data2 = [102, 70, 80, 140, 56, 53, 80, 75, 65, 147]
+        // var data3 = [90, 40, 30, 40, 90, 3, 60, 35, 95, 2]
+        // var data4 = [3, 20, 40, 10, 5, 15, 28, 19, 5, 9]
+
+        var data1 = get_data
+        var data2 = post_data
+        var data3 = put_data
+        var data4 = delete_data
+
+        // console.log(Math.max.apply(null,get_data))
+        x = Math.max.apply(null,get_data)
+        y = x % 10;
+        z = 10 - y;
+        z = x + z;
+        stepSize = 0
+        if (z<=100) {
+            stepSize = 10
+        }
+        else if (z<= 1000) {
+            stepSize = 100
+        }
+        else {
+            stepSize = 1000
+        }
+
+        var ctx = document.getElementById("recent-rep-chart");
+        if (ctx) {
+        ctx.height = 250;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            datasets: [
+                {
+                label: 'DELETE',
+                backgroundColor: brandDELETE,
+                borderColor: 'transparent',
+                pointHoverBackgroundColor: '#fff',
+                borderWidth: 0,
+                data: data4
+
+                },
+                {
+                label: 'PUT',
+                backgroundColor: brandPUT,
+                borderColor: 'transparent',
+                pointHoverBackgroundColor: '#fff',
+                borderWidth: 0,
+                data: data3
+
+                },
+                {
+                label: 'POST',
+                backgroundColor: brandPOST,
+                borderColor: 'transparent',
+                pointHoverBackgroundColor: '#fff',
+                borderWidth: 0,
+                data: data2
+
+                },
+                {
+                label: 'GET',
+                backgroundColor: brandGET,
+                borderColor: 'transparent',
+                pointHoverBackgroundColor: '#fff',
+                borderWidth: 0,
+                data: data1
+
+                }
+            ]
+            },
+            options: {
+            maintainAspectRatio: true,
+            legend: {
+                display: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                gridLines: {
+                    drawOnChartArea: true,
+                    color: '#f2f2f2'
+                },
+                ticks: {
+                    fontFamily: "Poppins",
+                    fontSize: 12
+                }
+                }],
+                yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    maxTicksLimit: 5,
+                    stepSize: stepSize,
+                    max: Math.max.apply(null,get_data),
+                    fontFamily: "Poppins",
+                    fontSize: 12
+                },
+                gridLines: {
+                    display: true,
+                    color: '#f2f2f2'
+
+                }
+                }]
+            },
+            elements: {
+                point: {
+                radius: 0,
+                hitRadius: 10,
+                hoverRadius: 4,
+                hoverBorderWidth: 3
+                }
+            }
+
+
+            }
+        });
+        }
+
+        })
+        // Percent Chart
+        var ctx = document.getElementById("percent-chart");
+        if (ctx) {
+        ctx.height = 250;
+        var weather_api = document.getElementById('total_weather_api').value;
+        var local_api = document.getElementById('total_local_api').value;
+
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+            datasets: [
+                {
+                label: "My First dataset",
+                data: [weather_api, local_api],
+                backgroundColor: [
+                    '#00b5e9',
+                    '#fa4251'
+                ],
+                hoverBackgroundColor: [
+                    '#00b5e9',
+                    '#fa4251'
+                ],
+                borderWidth: [
+                    0, 0
+                ],
+                hoverBorderColor: [
+                    'transparent',
+                    'transparent'
+                ]
+                }
+            ],
+            labels: [
+                'Weather API',
+                'Local API'
+            ]
+            },
+            options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            cutoutPercentage: 55,
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                titleFontFamily: "Poppins",
+                xPadding: 15,
+                yPadding: 10,
+                caretPadding: 0,
+                bodyFontSize: 16
+            }
+            }
+        });
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+
+</script>
+
+
+
+{% endblock custom_js %}
