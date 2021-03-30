@@ -25,7 +25,7 @@ def services(request):
     }
     return render(request , 'other/services.html',var)
 
-def contact_us(request):
+def contact_us_page(request):
     var = {
         'nbar': 'contact'
     }
