@@ -9,7 +9,7 @@ urlpatterns = [
     path('',views.index, name="index"),
     path('about-us',views.about_us, name="about-us"),
     path('services',views.services, name="services"),
-    path('contact-us',views.contact_us, name="contact-us"),
+    path('contact-us',views.contact_us_page, name="contact-us"),
     path('submit-contact-form',views.submit_contact_form,name="submit-contact-form"),
     
     ##### Authentication #####
