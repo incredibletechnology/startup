@@ -1,0 +1,119 @@
+{% extends 'adminbase/base.html' %}
+{% load static %}
+{% block pagetitle %}About Website{% endblock pagetitle %}
+
+{% block custom_css %}
+<style>
+    .about input[type=text] {
+        outline: none;
+        /* border-bottom: 1px solid gray; */
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: groove;
+        background-color: #eee;
+    }
+</style>
+{% endblock custom_css %}
+
+
+{% block mainContent %}
+
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="container" style="width: 70%;">
+
+                        {% if messages %}
+                            {% for m in messages %}
+                                {% if m.tags == 'success' %}
+                                <div style="display: block;" class="alert alert-success alert-dismissible fade show" role="alert" id="remove_alert">
+                                <strong>Great!</strong> {{m}}
+                                <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% elif m.tags == 'info' %}
+                                <div style="display: block;" class="alert alert-info alert-dismissible fade show" role="alert" id="remove_alert">
+                                <strong>Nothing!</strong> {{m}}
+                                <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% else %}
+                                <div style="display: block;" class="alert alert-danger alert-dismissible fade show" role="alert" id="remove_alert">
+                                <strong>Upps!</strong> {{m}}
+                                <button type="button" class="btn-close" onclick="remove_alert()" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <!-- Maintenance -->
+                        <div class="card">
+                            <div class="card-header" style="font-weight: 600; color: brown;">About Information</div>
+                            <div class="card-body card-block about">
+                                    <div class="form-group col-lg-12">
+                                        <lable for="website" class="form-label">Website</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="text" id="website" name="website" value="https://incredible-technology.herokuapp.com/" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <lable for="email" class="form-label">Email</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="text" id="email" name="email" value="info.incredibletechnology@gmail.com" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <lable for="facebook" class="form-label">Facebook</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="text" id="facebook" name="facebook" value="https://www.facebook.com/Incredible-Technology-110842477778753" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <lable for="instagram" class="form-label">Instagram</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="text" id="instagram" name="instagram" value="https://www.instagram.com/incredibletech5/" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <lable for="twitter" class="form-label">Twitter</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="text" id="twitter" name="twitter" value="https://twitter.com/IncredibleTech5" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-12">
+                                        <lable for="linkedin" class="form-label">LinkedIn</lable>
+                                        <div class="input-group" style="margin-top: 7px;">
+                                            <input type="text" id="linkedin" name="linkedin" value="https://www.linkedin.com/company/incredible-tech" class="form-control">
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% include 'adminbase/footer.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock mainContent %}
+
+{% block custom_js %}
+
+<script>
+  function changepass(obj) {
+      if($(obj).is(":checked")){
+          document.getElementById('myDIV').style.display = "block"; //Do stuff
+          //alert("Yes checked"); //when checked
+
+          $("#page-header-inner").addClass("sticky");
+      }else{
+          document.getElementById('myDIV').style.display = "none"; //Do stuff
+          //alert("Not checked"); //when not checked
+      }   
+  }
+</script>
+
+{% endblock custom_js %}

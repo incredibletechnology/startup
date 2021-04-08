@@ -63,7 +63,7 @@
                                                     <td>{{client.company}}</td>
                                                     <td>{{client.address}}</td>
                                                     {% if client.image %}
-                                                    <td><a href="{{client.image.url}}" target="_blank">View</a></td>
+                                                    <td><img src="{{client.image.url}}" alt="Photo"></td>
                                                     {% else %}
                                                     <td>No Photo</td>
                                                     {% endif %}
@@ -73,7 +73,7 @@
                                                 </tr>
                                                 {% endfor %}
                                             {% else %}
-                                            <tr><td colspan="8" style="text-align: center; font-size: 15px;">No Data Found</td></tr>
+                                            <tr><td colspan="9" style="text-align: center; font-size: 15px;">No Data Found</td></tr>
                                             {% endif %}
                                         </tbody>
                                     </table>

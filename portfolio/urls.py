@@ -21,6 +21,7 @@ urlpatterns = [
     path('add-user', webviews.add_user, name="add-user"),
     path('get-user', webviews.get_user, name="get-user"),
     path('adminindex',webviews.adminindex, name="adminindex"),
+    path('about-website',webviews.about_website, name="about-website"),
 
     ##### Settings #####
     path('settings', webviews.settings, name="settings"),

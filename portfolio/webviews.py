@@ -160,7 +160,7 @@ def add_user(request):
             elif role == '3':
                 superuser = True
                 staff = True
-            user = User.objects.create_user(password=pass1,username=username,email=email,is_staff=staff,is_superuser=superuser)
+            user = User.objects.create_user(password=pass1,username=username,email=email,is_staff=staff,is_superuser=superuser,first_name=fname,last_name=lname,phone=phone)
             user.save()
             Logs.store_admin_log(request.get_full_path(),request.method,"success",200,"user ({}) added successfully".format(email),user)
             messages.success(request, "user added successfully")
@@ -419,6 +419,13 @@ def send_custom_email_to_admins(request):
     email.send()
     return True
 
+def about_website(request):
+    user = request.user
+    var = {
+        'is_photo': False if user.image == '' else True,
+        'nbar': 'aboutwebsite'
+    }
+    return render(request, 'authentication/about.html',var)
 
 #################### Settings Section ####################
 
